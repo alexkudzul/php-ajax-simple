@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Simple</title>
+</head>
+<body>
+
+    <button onclick="sendRequestGET()">
+        Send Ajax Request GET
+    </button>
+
+    <button onclick="sendRequestPOST()">
+        Send Ajax Request POST
+    </button>
+
+    <h1 id="titleGET"></h1>
+    <br>
+    <h1 id="titlePOST"></h1>
+
+
+    <script>
+
+        // EJEMPLO GET
+
+        function sendRequestGET(){
+            let theObjectGet = new XMLHttpRequest();
+            theObjectGet.open('GET','get.php', true);
+            // Que tipo de dato se esta solicitando, "x-www-form-urlencoded" codifica los datos que son enviandos al servidor desde el navegador
+            theObjectGet.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            // metodo que se encarga de ver que esta devolviendo el servidor
+            theObjectGet.onreadystatechange = function(){
+                // escucha la respuesta en formato de texto
+                console.log(theObjectGet.responseText);
+                document.getElementById('titleGET').innerHTML=theObjectGet.responseText;
+            }
+            theObjectGet.send();
+        }
+
+        // EJEMPLO POST
+
+        function sendRequestPOST(){
+            let theObjectPost = new XMLHttpRequest();
+            theObjectPost.open('POST','post.php', true);
+            // Que tipo de dato se esta solicitando, "x-www-form-urlencoded" codifica los datos que son enviandos al servidor desde el navegador
+            theObjectPost.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            // metodo que se encarga de ver que esta devolviendo el servidor
+            theObjectPost.onreadystatechange = function(){
+                // escucha la respuesta en formato de texto
+                document.getElementById('titlePOST').innerHTML = theObjectPost.responseText;
+            }
+            theObjectPost.send('username=Alex');
+        }
+
+    </script>
+</body>
+</html>
